@@ -3,7 +3,7 @@
 [![tag](https://img.shields.io/github/tag/ako-deno/accepts.svg)](https://github.com/ako-deno/accepts/tags)
 ![accepts-ci](https://github.com/ako-deno/accepts/workflows/accepts-ci/badge.svg)
 
-Higher level content negotiation using [negotiator](https://deno.land/x/negotiator). Based on `https://github.com/jshttp/accepts`.
+Higher level content negotiation for Deno using [negotiator](https://deno.land/x/negotiator). Based on `https://github.com/jshttp/accepts`.
 
 In addition to negotiator, it allows:
 
