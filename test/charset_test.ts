@@ -1,5 +1,4 @@
 import {
-  assertStrictEq,
   assertEquals,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Accepts } from "../mod.ts";
@@ -30,10 +29,10 @@ test("accepts.charsets() with multiple arguments when Accept-Charset is populate
   assertEquals(accept.charsets(["utf-7", "utf-8"]), ["utf-8"]);
 });
 
-test("accepts.charsets() with multiple arguments when Accept-Charset is populated if no types match should return false", function () {
+test("accepts.charsets() with multiple arguments when Accept-Charset is populated if no types match should return []", function () {
   const header = createRequest("utf-8, iso-8859-1;q=0.2, utf-7;q=0.5");
   const accept = new Accepts(header);
-  assertStrictEq(accept.charsets(["utf-16"]), false);
+  assertEquals(accept.charsets(["utf-16"]), []);
 });
 
 test("accepts.charsets() with multiple arguments when Accept-Charset is populated when Accept-Charset is not populated should return the first type", function () {

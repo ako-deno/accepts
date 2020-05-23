@@ -52,17 +52,17 @@ export class Accepts {
    *     // Accept: text/*, application/json
    *     this.types(['image/png']);
    *     this.types(['png']);
-   *     // => undefined
+   *     // => []
    *
    *     // Accept: text/*;q=.5, application/json
    *     this.types(['html', 'json']);
-   *     // => "json"
+   *     // => ["json"]
    *
-   * @param {Array} types...
-   * @return {Array|Boolean}
+   * @param {string[]} types...
+   * @return {string[]}
    * @public
    */
-  types(types?: string[]): string[] | boolean {
+  types(types?: string[]): string[] {
     // no types, return all requested types
     if (!types || types.length === 0) {
       return this.negotiator.mediaTypes();
@@ -79,11 +79,7 @@ export class Accepts {
       (mimes.filter((t) => t && validMime(t))) as string[],
     );
     const first = accepts[0];
-    return first ? [types[mimes.indexOf(first)]] : false;
-  }
-
-  type(types: string[] | undefined): string[] | boolean {
-    return this.types(types);
+    return first ? [types[mimes.indexOf(first)]] : [];
   }
 
   /**
@@ -94,21 +90,17 @@ export class Accepts {
    *
    *     ['gzip', 'deflate']
    *
-   * @param {Array} encodings...
-   * @return {Array|Boolean}
+   * @param {string[]} encodings...
+   * @return {string[]}
    * @public
    */
-  encodings(encodings?: string[]): string[] | boolean {
+  encodings(encodings?: string[]): string[] {
     // no encodings, return all requested encodings
     if (!encodings || encodings.length === 0) {
       return this.negotiator.encodings();
     }
     const c = this.negotiator.encodings(encodings)[0];
-    return c ? [c] : false;
-  }
-
-  encoding(types?: string[]): string[] | boolean {
-    return this.encodings(types);
+    return c ? [c] : [];
   }
 
   /**
@@ -119,21 +111,17 @@ export class Accepts {
    *
    *     ['utf-8', 'utf-7', 'iso-8859-1']
    *
-   * @param {Array} charsets...
-   * @return {Array|Boolean}
+   * @param {string[]} charsets...
+   * @return {string[]}
    * @public
    */
-  charsets(charsets?: string[]): string[] | boolean {
+  charsets(charsets?: string[]): string[] {
     // no charsets, return all requested charsets
     if (!charsets || charsets.length === 0) {
       return this.negotiator.charsets();
     }
     const c = this.negotiator.charsets(charsets)[0];
-    return c ? [c] : false;
-  }
-
-  charset(charsets?: string[]): string[] | boolean {
-    return this.charsets(charsets);
+    return c ? [c] : [];
   }
 
   /**
@@ -144,30 +132,18 @@ export class Accepts {
    *
    *     ['es', 'pt', 'en']
    *
-   * @param {Array} langs...
-   * @return {Array|boolean}
+   * @param {string[]} langs...
+   * @return {string[]}
    * @public
    */
-  languages(languages?: string[]): string[] | boolean {
+  languages(languages?: string[]): string[] {
     // no languages, return all requested languages
     if (!languages || languages.length === 0) {
       return this.negotiator.languages();
     }
 
     const c = this.negotiator.languages(languages)[0];
-    return c ? [c] : false;
-  }
-
-  language(language?: string[]): string[] | boolean {
-    return this.language(language);
-  }
-
-  lang(language?: string[]): string[] | boolean {
-    return this.language(language);
-  }
-
-  langs(language?: string[]): string[] | boolean {
-    return this.language(language);
+    return c ? [c] : [];
   }
 }
 

@@ -1,5 +1,4 @@
 import {
-  assertStrictEq,
   assertEquals,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Accepts } from "../mod.ts";
@@ -30,10 +29,10 @@ test("accepts.languages() with multiple arguments when Accept-Language is popula
   assertEquals(accept.languages(["es", "en"]), ["es"]);
 });
 
-test("accepts.languages() with multiple arguments when Accept-Language is populated if no types match should return false", function () {
+test("accepts.languages() with multiple arguments when Accept-Language is populated if no types match should return []", function () {
   const header = createRequest("en;q=0.8, es, pt");
   const accept = new Accepts(header);
-  assertStrictEq(accept.languages(["fr", "au"]), false);
+  assertEquals(accept.languages(["fr", "au"]), []);
 });
 
 test("accepts.languages() with multiple arguments when Accept-Language is not populated should return the first type", function () {

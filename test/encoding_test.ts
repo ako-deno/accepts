@@ -1,5 +1,4 @@
 import {
-  assertStrictEq,
   assertEquals,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Accepts } from "../mod.ts";
@@ -20,10 +19,10 @@ test("accepts.encodings() with no arguments when Accept-Encoding is not in reque
   assertEquals(accept.encodings(["gzip", "deflate", "identity"]), ["identity"]);
 });
 
-test("accepts.encodings() with no arguments when Accept-Encoding is not in request when identity is not included should return false", function () {
+test("accepts.encodings() with no arguments when Accept-Encoding is not in request when identity is not included should return []", function () {
   const header = createRequest();
   var accept = new Accepts(header);
-  assertStrictEq(accept.encodings(["gzip", "deflate"]), false);
+  assertEquals(accept.encodings(["gzip", "deflate"]), []);
 });
 
 test("accepts.encodings() with no arguments when Accept-Encoding is empty should return identity", function () {
@@ -33,10 +32,10 @@ test("accepts.encodings() with no arguments when Accept-Encoding is empty should
   assertEquals(accept.encodings(["gzip", "deflate", "identity"]), ["identity"]);
 });
 
-test("accepts.encodings() with no arguments when Accept-Encoding is empty when identity is not included should return false", function () {
+test("accepts.encodings() with no arguments when Accept-Encoding is empty when identity is not included should return []", function () {
   const header = createRequest("");
   var accept = new Accepts(header);
-  assertStrictEq(accept.encodings(["gzip", "deflate"]), false);
+  assertEquals(accept.encodings(["gzip", "deflate"]), []);
 });
 
 test("accepts.encodings() with multiple arguments should return the best fit", function () {

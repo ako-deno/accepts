@@ -1,5 +1,4 @@
 import {
-  assertStrictEq,
   assertEquals,
 } from "https://deno.land/std/testing/asserts.ts";
 import { Accepts } from "../mod.ts";
@@ -29,12 +28,12 @@ test("accepts.types() with no arguments when Accept is empty should return []", 
   assertEquals(accept.types(), []);
 });
 
-test("accepts.types() with no valid types when Accept is populated should return false", function () {
+test("accepts.types() with no valid types when Accept is populated should return []", function () {
   const header = createRequest(
     "application/*;q=0.2, image/jpeg;q=0.8, text/html, text/plain",
   );
   const accept = new Accepts(header);
-  assertStrictEq(accept.types(["image/png", "image/tiff"]), false);
+  assertEquals(accept.types(["image/png", "image/tiff"]), []);
 });
 
 test("accepts.types() with no valid types when Accept is not populated should return the first type", function () {
@@ -53,8 +52,8 @@ test("accepts.types() when extensions are given should convert to mime types", f
   assertEquals(accept.types([".html"]), [".html"]);
   assertEquals(accept.types(["txt"]), ["txt"]);
   assertEquals(accept.types([".txt"]), [".txt"]);
-  assertStrictEq(accept.types(["png"]), false);
-  assertStrictEq(accept.types(["bogus"]), false);
+  assertEquals(accept.types(["png"]), []);
+  assertEquals(accept.types(["bogus"]), []);
 });
 
 test("accepts.types() when an array is given should return the first match", function () {
@@ -85,7 +84,7 @@ test("accepts.types() when present in Accept as a subtype match should return th
   const accept = new Accepts(header);
   assertEquals(accept.types(["text/html"]), ["text/html"]);
   assertEquals(accept.types(["text/plain"]), ["text/plain"]);
-  assertEquals(accept.types(["image/png"]), false);
+  assertEquals(accept.types(["image/png"]), []);
 });
 
 function createRequest(type?: string) {
