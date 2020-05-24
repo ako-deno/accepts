@@ -14,7 +14,7 @@ In addition to negotiator, it allows:
 ## API
 
 ```js
-import { Accepts } from "https://raw.githubusercontent.com/ako-deno/accepts/master/mod.ts";
+import { Accepts } from "https://deno.land/x/accepts/mod.ts";
 ```
 
 ### Accepts(headers: Headers)
@@ -75,7 +75,7 @@ import {
   serve,
   Response,
 } from "https://deno.land/std/http/server.ts";
-import { Accepts } from "https://raw.githubusercontent.com/ako-deno/accepts/master/mod.ts";
+import { Accepts } from "https://deno.land/x/accepts/mod.ts";
 
 const server = serve("127.0.0.1:3000");
 console.log("Server listening on: 3000");
