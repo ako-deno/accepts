@@ -2,6 +2,7 @@
 
 [![tag](https://img.shields.io/github/tag/ako-deno/accepts.svg)](https://github.com/ako-deno/accepts/tags)
 ![accepts-ci](https://github.com/ako-deno/accepts/workflows/accepts-ci/badge.svg)
+[![HitCount](http://hits.dwyl.com/ako-deno/accepts.svg)](http://hits.dwyl.com/ako-deno/accepts)
 
 Higher level content negotiation for Deno using [negotiator](https://deno.land/x/negotiator). Based on `https://github.com/jshttp/accepts`.
 
