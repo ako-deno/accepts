@@ -1,7 +1,6 @@
-import Negotiator from "https://deno.land/x/negotiator/mod.ts";
-import { lookup } from "https://deno.land/x/media_types/mod.ts";
-
+import Negotiator from "https://deno.land/x/negotiator@1.0.0/mod.ts";
 export {
   Negotiator,
-  lookup,
 };
+
+export { lookup } from "https://deno.land/x/media_types@v2.4.1/mod.ts";
