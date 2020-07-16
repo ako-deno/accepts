@@ -26,25 +26,25 @@ test("accepts.languages() with no arguments when Accept-Language is empty should
 test("accepts.languages() with multiple arguments when Accept-Language is populated if any types types match should return the best fit", function () {
   const header = createRequest("en;q=0.8, es, pt");
   const accept = new Accepts(header);
-  assertEquals(accept.languages(["es", "en"]), ["es"]);
+  assertEquals(accept.languages(["es", "en"]), "es");
 });
 
 test("accepts.languages() with multiple arguments when Accept-Language is populated if no types match should return []", function () {
   const header = createRequest("en;q=0.8, es, pt");
   const accept = new Accepts(header);
-  assertEquals(accept.languages(["fr", "au"]), []);
+  assertEquals(accept.languages(["fr", "au"]), false);
 });
 
 test("accepts.languages() with multiple arguments when Accept-Language is not populated should return the first type", function () {
   const header = createRequest();
   const accept = new Accepts(header);
-  assertEquals(accept.languages(["es", "en"]), ["es"]);
+  assertEquals(accept.languages(["es", "en"]), "es");
 });
 
 test("accepts.languages() with an array should return the best fit", function () {
   const header = createRequest("en;q=0.8, es, pt");
   const accept = new Accepts(header);
-  assertEquals(accept.languages(["es", "en"]), ["es"]);
+  assertEquals(accept.languages(["es", "en"]), "es");
 });
 
 function createRequest(language?: string) {
