@@ -59,10 +59,10 @@ export class Accepts {
    *     // => ["json"]
    *
    * @param {Array} types...
-   * @return {Array|String|Boolean}
+   * @return {Array|String|False}
    * @public
    */
-  types(types?: string[]): string[] | string | boolean {
+  types(types?: string[]): string[] | string | false {
     // no types, return all requested types
     if (!types || types.length === 0) {
       return this.negotiator.mediaTypes();
@@ -91,10 +91,10 @@ export class Accepts {
    *     ['gzip', 'deflate']
    *
    * @param {Array} encodings...
-   * @return {Array|String|Boolean}
+   * @return {Array|String|False}
    * @public
    */
-  encodings(encodings?: string[]): string[] | string | boolean {
+  encodings(encodings?: string[]): string[] | string | false {
     // no encodings, return all requested encodings
     if (!encodings || encodings.length === 0) {
       return this.negotiator.encodings();
@@ -111,10 +111,10 @@ export class Accepts {
    *     ['utf-8', 'utf-7', 'iso-8859-1']
    *
    * @param {Array} charsets...
-   * @return {Array|String|Boolean}
+   * @return {Array|String|False}
    * @public
    */
-  charsets(charsets?: string[]): string[] | string | boolean {
+  charsets(charsets?: string[]): string[] | string | false {
     // no charsets, return all requested charsets
     if (!charsets || charsets.length === 0) {
       return this.negotiator.charsets();
@@ -131,10 +131,10 @@ export class Accepts {
    *     ['es', 'pt', 'en']
    *
    * @param {Array} langs...
-   * @return {Array|String|Boolean}
+   * @return {Array|String|False}
    * @public
    */
-  languages(languages?: string[]): string[] | string | boolean {
+  languages(languages?: string[]): string[] | string | false {
     // no languages, return all requested languages
     if (!languages || languages.length === 0) {
       return this.negotiator.languages();
