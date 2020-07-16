@@ -12,21 +12,23 @@ for await (const req of server) {
   const res: Response = {
     headers: new Headers(),
   };
-  const type = accept.types(["json", "html"]);
-  switch (type[0]) {
-    case "json":
-      res.body = '{"hello":"world!"}';
-      res.headers!.set("Content-Type", "application/json");
-      break;
-    case "html":
-      res.body = "<b>hello, world!</b>";
-      res.headers!.set("Content-Type", "text/html");
-      break;
-    default:
-      // the fallback is text/plain, so no need to specify it above
-      res.body = "hello, world!";
-      res.headers!.set("Content-Type", "text/plain");
-      break;
+  let type = accept.types(["json", "html"]);
+  if (type) {
+    type = typeof type === "string" ? type : type[0];
+    switch (type) {
+      case "json":
+        res.body = '{"hello":"world!"}';
+        res.headers!.set("Content-Type", "application/json");
+        break;
+      case "html":
+        res.body = "<b>hello, world!</b>";
+        res.headers!.set("Content-Type", "text/html");
+        break;
+    }
+  } else {
+    // the fallback is text/plain, so no need to specify it above
+    res.body = "hello, world!";
+    res.headers!.set("Content-Type", "text/plain");
   }
   req.respond(res).catch(() => {});
 }

@@ -9,7 +9,7 @@ Higher level content negotiation for Deno using [negotiator](https://deno.land/x
 In addition to negotiator, it allows:
 
 - Allows type shorthands such as `json`.
-- Returns `[]` when no types match
+- Returns `false` when no types match
 - Treats non-existent headers as `*`
 
 ## API
@@ -26,34 +26,34 @@ Create a new `Accepts` object for the given `header`.
 const accept = new Accepts(header);
 ```
 
-#### accept.charsets(charsets?: string[]): string[]
+#### accept.charsets(charsets?: string[]): string[] | string | boolean
 
 Return the first accepted charset. If nothing in `charsets` is accepted,
-then `[]` is returned.
+then `false` is returned.
 
 Return the charsets that the request accepts, in the order of the client's
 preference (most preferred first).
 
-#### accept.encodings(encodings?: string[]): string[]
+#### accept.encodings(encodings?: string[]): string[] | string | boolean
 
 Return the first accepted encoding. If nothing in `encodings` is accepted,
-then `[]` is returned.
+then `false` is returned.
 
 Return the encodings that the request accepts, in the order of the client's
 preference (most preferred first).
 
-#### accept.languages(languages?: string[]): string[]
+#### accept.languages(languages?: string[]): string[] | string | boolean
 
 Return the first accepted language. If nothing in `languages` is accepted,
-then `[]` is returned.
+then `false` is returned.
 
 Return the languages that the request accepts, in the order of the client's
 preference (most preferred first).
 
-#### accept.types(types?: string[]): string[]
+#### accept.types(types?: string[]): string[] | string | boolean
 
 Return the first accepted type (and it is returned as the same text as what
-appears in the `types` array). If nothing in `types` is accepted, then `[]`
+appears in the `types` array). If nothing in `types` is accepted, then `false`
 is returned.
 
 The `types` array can contain full MIME types or file extensions. Any value
@@ -76,7 +76,7 @@ import {
   serve,
   Response,
 } from "https://deno.land/std/http/server.ts";
-import { Accepts } from "https://deno.land/x/accepts/mod.ts";
+import { Accepts } from "../mod.ts";
 
 const server = serve("127.0.0.1:3000");
 console.log("Server listening on: 3000");
@@ -86,21 +86,23 @@ for await (const req of server) {
   const res: Response = {
     headers: new Headers(),
   };
-  const type = accept.types(["json", "html"]);
-  switch (type[0]) {
-    case "json":
-      res.body = '{"hello":"world!"}';
-      res.headers!.set("Content-Type", "application/json");
-      break;
-    case "html":
-      res.body = "<b>hello, world!</b>";
-      res.headers!.set("Content-Type", "text/html");
-      break;
-    default:
-      // the fallback is text/plain, so no need to specify it above
-      res.body = "hello, world!";
-      res.headers!.set("Content-Type", "text/plain");
-      break;
+  let type = accept.types(["json", "html"]);
+  if (type) {
+    type = typeof type === "string" ? type : type[0];
+    switch (type) {
+      case "json":
+        res.body = '{"hello":"world!"}';
+        res.headers!.set("Content-Type", "application/json");
+        break;
+      case "html":
+        res.body = "<b>hello, world!</b>";
+        res.headers!.set("Content-Type", "text/html");
+        break;
+    }
+  } else {
+    // the fallback is text/plain, so no need to specify it above
+    res.body = "hello, world!";
+    res.headers!.set("Content-Type", "text/plain");
   }
   req.respond(res).catch(() => {});
 }
