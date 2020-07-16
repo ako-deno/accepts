@@ -1,4 +1,11 @@
 
+2.0.0 / 2020-07-17
+==================
+
+  * doc: update doc and example on the return type
+  * feat: only return false insted of boolean
+  * breaking: make return value type compatible with original accepts
+
 1.0.1 / 2020-07-14
 ==================
 
