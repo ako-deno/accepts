@@ -75,7 +75,7 @@ server.
 import {
   serve,
   Response,
-} from "https://deno.land/std/http/server.ts";
+} from "https://deno.land/std@0.69.0/http/server.ts";
 import { Accepts } from "../mod.ts";
 
 const server = serve("127.0.0.1:3000");
