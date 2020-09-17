@@ -1,4 +1,9 @@
 
+2.1.0 / 2020-09-17
+==================
+
+  * (feat): upgrade imports to support Deno 1.4.0 strict type imports (#3)
+
 2.0.0 / 2020-07-17
 ==================
 
