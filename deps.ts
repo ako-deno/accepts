@@ -3,4 +3,4 @@ export {
   Negotiator,
 };
 
-export { lookup } from "https://deno.land/x/media_types@v2.8.2/mod.ts";
+export { lookup } from "https://deno.land/x/media_types@v2.9.0/mod.ts";
